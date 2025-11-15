@@ -21,21 +21,28 @@
 
         <!-- Títol i instruccions -->
         <h1 class="text-2xl font-bold text-slate-800 mb-2">Pràctica d'accentuació</h1>
-        <p class="text-sm text-slate-500 mb-6">Classifica la paraula següent.</p>
+        <p class="text-sm text-slate-500 mb-6">
+            Classifica la paraula següent com a aguda, plana o esdrúixola.
+        </p>
 
         <!-- Paraula -->
-        <div id="word-display" class="bg-slate-100 p-6 rounded-lg text-4xl font-bold text-indigo-700 mb-6 tracking-wider min-h-[80px] flex items-center justify-center">
+        <div
+            id="word-display"
+            class="bg-slate-100 p-6 rounded-lg text-4xl font-bold text-indigo-700 mb-6 tracking-wider min-h-[80px] flex items-center justify-center">
         </div>
 
         <!-- Botons -->
         <div class="flex flex-col space-y-3">
-            <button id="aguda-btn" class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-blue-600 hover:bg-blue-700 disabled:opacity-50">
+            <button id="aguda-btn"
+                    class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-blue-600 hover:bg-blue-700 disabled:opacity-50">
                 Aguda
             </button>
-            <button id="plana-btn" class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-green-600 hover:bg-green-700 disabled:opacity-50">
+            <button id="plana-btn"
+                    class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-green-600 hover:bg-green-700 disabled:opacity-50">
                 Plana
             </button>
-            <button id="esdruixola-btn" class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-purple-600 hover:bg-purple-700 disabled:opacity-50">
+            <button id="esdruixola-btn"
+                    class="w-full p-3 rounded-lg text-white font-semibold transition-colors bg-purple-600 hover:bg-purple-700 disabled:opacity-50">
                 Esdrúixola
             </button>
         </div>
@@ -44,7 +51,8 @@
         <div id="feedback-message" class="mt-4 h-6 font-medium text-lg"></div>
 
         <!-- Següent -->
-        <button id="next-word-button" class="w-full p-3 rounded-lg bg-slate-700 text-white font-semibold mt-4 hover:bg-slate-800 hidden">
+        <button id="next-word-button"
+                class="w-full p-3 rounded-lg bg-slate-700 text-white font-semibold mt-4 hover:bg-slate-800 hidden">
             Següent paraula
         </button>
 
@@ -59,6 +67,10 @@
                 <span id="total-attempts" class="text-2xl font-bold">0</span>
             </div>
         </div>
+
+        <p class="mt-4 text-xs text-slate-400">
+            Versió 1.1 – si veus això, tens la darrera versió carregada.
+        </p>
 
     </div>
 
@@ -130,6 +142,7 @@
             wordDisplayEl.textContent = currentWord.word;
             answered = false;
             feedbackEl.textContent = "";
+            feedbackEl.className = "mt-4 h-6 font-medium text-lg";
             nextWordBtn.classList.add("hidden");
             choiceButtons.forEach(btn => btn.disabled = false);
         }
@@ -145,7 +158,11 @@
                 feedbackEl.textContent = "Correcte!";
                 feedbackEl.className = "mt-4 h-6 font-medium text-lg text-green-600";
             } else {
-                feedbackEl.textContent = `Incorrecte. És ${currentWord.type}.`;
+                let textType = currentWord.type;
+                if (textType === "aguda") textType = "una paraula aguda";
+                if (textType === "plana") textType = "una paraula plana";
+                if (textType === "esdrúixola") textType = "una paraula esdrúixola";
+                feedbackEl.textContent = `Incorrecte. És ${textType}.`;
                 feedbackEl.className = "mt-4 h-6 font-medium text-lg text-red-600";
             }
 
